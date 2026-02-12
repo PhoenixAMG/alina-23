@@ -535,7 +535,6 @@
           </div>
         </div>
 
-        <div class="hint">Mobile friendly · GitHub Pages kompatibel</div>
       </div>
     </section>
 
@@ -554,7 +553,7 @@
             <div class="heroBadge">🎉 11.04 → 12.04.2026 </div>
             <div class="heroTitle">Alina’s 23. Geburtstag</div>
             <!--<p class="heroSub">
-              Wir starten am <b>11.04 ab 18:00</b> und feiern rein in den <b>12.04</b>.
+              Wir starten am <b>11.04 ab 18:30</b> und feiern rein in den <b>12.04</b>.
               Alles Wichtige findest du unten – übersichtlich & schnell erfassbar.
             </p> -->
           </div>
@@ -595,7 +594,7 @@
               <div class="infoMain">
                 <div class="label2">Datum & Uhrzeit</div>
                 <div class="value2">
-                  11. April · ab 18:00
+                  11. April · ab 18:30
                   <span class="subline">Reinfeiern in den 12. April</span>
                 </div>
                 <div class="inlineActions">
@@ -609,7 +608,7 @@
               <div class="ico">⏱️</div>
               <div class="infoMain">
                 <div class="label2">Start</div>
-                <div class="value2">18:00 Uhr</div>
+                <div class="value2">18:30 Uhr</div>
               </div>
             </div>
 
@@ -619,7 +618,7 @@
               <div class="infoMain">
                 <div class="label2">Ort</div>
                 <div class="value2">
-                  Auf der Nutzung 2
+                  Auf der Nutzung 2a
                   <span class="subline">91074 Herzogenaurach</span>
                 </div>
 
@@ -628,8 +627,9 @@
                   <iframe
                     loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"
-                    src="https://www.google.com/maps?q=Auf%20der%20Nutzung%202%2C%2091074%20Herzogenaurach&output=embed">
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d646.7064278628293!2d10.9014836!3d49.5821765!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a201816fd667fd%3A0xa08c0e27b78c286a!2sRKV%20Solidarit%C3%A4t%201906%20e.V.!5e0!3m2!1sde!2sde!4v1770928637839!5m2!1sde!2sde">
                   </iframe>
+                  
                 </div>
               </div>
             </div>
@@ -639,20 +639,20 @@
               <div class="ico">🚗</div>
               <div class="infoMain">
                 <div class="label2">Parkplätze</div>
-                <div class="value2">mehr als genug</div>
+                <div class="value2">unbegrenzt</div>
               </div>
             </div>
 
             <!-- Food/Drinks -->
             <div class="infoRow">
-              <div class="ico">🍕</div>
+              <div class="ico">🥂</div>
               <div class="infoMain">
                 <div class="label2">Verpflegung</div>
                 <div class="value2">Abendessen, Snacks & Drinks</div>
               </div>
             </div>
           </div>
-           <!-- Right image -->
+           <!-- Footer image -->
               <div class="heroSide">
                 <img src="alina_right.png" alt="Alina" class="heroImage">
               </div>
@@ -691,57 +691,29 @@
     });
     reopenBtn?.addEventListener("click", (e) => { e.preventDefault(); resetEnvelope(); });
 
-    // ICS download (calendar)
-    // Event: 11.04 18:00 -> 12.04 02:00 (anpassen falls nötig)
-    const event = {
-      title: "Alina’s 23. Geburtstag – Reinfeiern",
-      location: "Auf der Nutzung 2, 91074 Herzogenaurach",
-      description: "Alina’s 23. Geburtstag. Start: 11.04 ab 18:00, reinfeiern in den 12.04.",
-      startLocal: "2026-04-11T18:00",
-      endLocal:   "2026-04-12T02:00"
-    };
-
-    function toICSDate(localDateTime){
-      return localDateTime.replace(/[-:]/g, "").replace("T","T") + "00";
-    }
-
-    document.getElementById("icsBtn").addEventListener("click", (e) => {
+    document.getElementById("icsBtn").addEventListener("click", function(e){
       e.preventDefault();
-      const dtStart = toICSDate(event.startLocal);
-      const dtEnd   = toICSDate(event.endLocal);
-      const uid = "alina-invite-" + Math.random().toString(16).slice(2) + "@invite";
-      const dtstamp = toICSDate(new Date().toISOString().slice(0,16));
+
       const ics =
-      `BEGIN:VCALENDAR
-      VERSION:2.0
-      PRODID:-//Invite//DE
-      CALSCALE:GREGORIAN
-      METHOD:PUBLISH
-      BEGIN:VEVENT
-      UID:${uid}
-      DTSTAMP:${dtstamp}
-      DTSTART:${dtStart}
-      DTEND:${dtEnd}
-      SUMMARY:${event.title}
-      LOCATION:${event.location}
-      DESCRIPTION:${event.description}
-      END:VEVENT
-      END:VEVENT
-      END:VCALENDAR`;
+    `BEGIN:VCALENDAR
+    VERSION:2.0
+    PRODID:-//Alina23//DE
+    BEGIN:VEVENT
+    UID:${Date.now()}@alina23
+    DTSTAMP:20260401T120000Z
+    DTSTART:20260411T163000Z
+    DTEND:20260412T000000Z
+    SUMMARY:Alina's 23. Geburtstag
+    DESCRIPTION:Reinfeiern ab 11.04. um 18:30 Uhr
+    LOCATION:Auf der Nutzung 2a, 91074 Herzogenaurach
+    END:VEVENT
+    END:VCALENDAR`;
 
-      // Fix: remove accidental duplicate END:VEVENT if any
-      const cleaned = ics.replace("END:VEVENT\nEND:VEVENT", "END:VEVENT");
-
-      const blob = new Blob([cleaned], { type: "text/calendar;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "Alina-23-Einladung.ics";
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
+      window.location.href =
+        "data:text/calendar;charset=utf-8," + encodeURIComponent(ics);
     });
+
+
   </script>
 </body>
 </html>
