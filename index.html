@@ -5,6 +5,7 @@
   <meta name="robots" content="noindex, nofollow, noarchive">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Alina’s 23. Geburtstag – Einladung</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
   <meta name="description" content="Digitale Einladung zu Alinas 23. Geburtstag" />
 
   <style>
@@ -598,19 +599,19 @@
                   <span class="subline">Reinfeiern in den 12. April</span>
                 </div>
                 <div class="inlineActions">
-                  <button class="btnSmall primary" id="icsBtn" type="button">➕ In Kalender</button>
+                  <button class="btnSmall primary" id="icsBtn" type="button">➕ In Kalender speichern</button>
                 </div>
               </div>
             </div>
 
-            <!-- Start -->
+            <!-- Start 
             <div class="infoRow">
               <div class="ico">⏱️</div>
               <div class="infoMain">
                 <div class="label2">Start</div>
                 <div class="value2">18:30 Uhr</div>
               </div>
-            </div>
+            </div>-->
 
             <!-- Location + Map -->
             <div class="infoRow">
@@ -629,6 +630,8 @@
                     referrerpolicy="no-referrer-when-downgrade"
                     src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d646.7064278628293!2d10.9014836!3d49.5821765!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a201816fd667fd%3A0xa08c0e27b78c286a!2sRKV%20Solidarit%C3%A4t%201906%20e.V.!5e0!3m2!1sde!2sde!4v1770928637839!5m2!1sde!2sde">
                   </iframe>
+
+                  
                   
                 </div>
               </div>
@@ -691,26 +694,76 @@
     });
     reopenBtn?.addEventListener("click", (e) => { e.preventDefault(); resetEnvelope(); });
 
-    document.getElementById("icsBtn").addEventListener("click", function(e){
+    document.getElementById("icsBtn").addEventListener("click", (e) => {
       e.preventDefault();
 
-      const ics =
-    `BEGIN:VCALENDAR
-    VERSION:2.0
-    PRODID:-//Alina23//DE
-    BEGIN:VEVENT
-    UID:${Date.now()}@alina23
-    DTSTAMP:20260401T120000Z
-    DTSTART:20260411T163000Z
-    DTEND:20260412T000000Z
-    SUMMARY:Alina's 23. Geburtstag
-    DESCRIPTION:Reinfeiern ab 11.04. um 18:30 Uhr
-    LOCATION:Auf der Nutzung 2a, 91074 Herzogenaurach
-    END:VEVENT
-    END:VCALENDAR`;
+      const CRLF = "\r\n";
 
-      window.location.href =
-        "data:text/calendar;charset=utf-8," + encodeURIComponent(ics);
+      // Eventdaten (anpassbar)
+      const uid = `${Date.now()}@alina23`;
+      const dtstamp = "20260401T120000Z";
+      const dtstart = "20260411T183000"; // lokale Zeit 18:30
+      const dtend = "20260412T020000";   // lokale Zeit 02:00
+      const tzid = "Europe/Berlin";
+
+      // ICS-Text mit TZID (keine Z am Ende, da TZID verwendet wird)
+      const ics =
+        "BEGIN:VCALENDAR" + CRLF +
+        "VERSION:2.0" + CRLF +
+        "PRODID:-//Alina23//DE" + CRLF +
+        "CALSCALE:GREGORIAN" + CRLF +
+        "METHOD:PUBLISH" + CRLF +
+        "BEGIN:VEVENT" + CRLF +
+        `UID:${uid}` + CRLF +
+        `DTSTAMP:${dtstamp}` + CRLF +
+        `DTSTART;TZID=${tzid}:${dtstart}` + CRLF +
+        `DTEND;TZID=${tzid}:${dtend}` + CRLF +
+        "SUMMARY:Alina's Geburtstagsfeier" + CRLF +
+        "DESCRIPTION:Reinfeiern ab 11.04. um 18:30 Uhr" + CRLF +
+        "LOCATION:Auf der Nutzung 2a\\, 91074 Herzogenaurach" + CRLF +
+        "END:VEVENT" + CRLF +
+        "END:VCALENDAR";
+
+      const filename = "Alina-23.ics";
+
+      // Browser/Platform-Erkennung
+      const ua = navigator.userAgent || "";
+      const isIOS = /iP(hone|od|ad)/i.test(ua);
+      const isSafari = /Safari/i.test(ua) && !/Chrome/i.test(ua);
+
+      // Versuch: Blob + objectURL (funktioniert in den meisten Desktop-Browsern)
+      try {
+        const blob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+
+        if (isIOS && isSafari) {
+          // iOS Safari: direkte Navigation zum Blob-URL oder data-URL als Fallback
+          // Manche iOS-Versionen öffnen Blob-URLs nicht korrekt, daher data-URL fallback
+          // Versuche zuerst window.location.href auf Blob-URL
+          window.location.href = url;
+
+          // Fallback: nach kurzer Verzögerung data-URL öffnen (falls Blob nicht geöffnet wurde)
+          setTimeout(() => {
+            const dataUrl = "data:text/calendar;charset=utf8," + encodeURIComponent(ics);
+            window.location.href = dataUrl;
+            setTimeout(() => URL.revokeObjectURL(url), 2000);
+          }, 500);
+        } else {
+          // Desktop / andere Mobilbrowser: Download-Link mit download-Attribut
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = filename;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          setTimeout(() => URL.revokeObjectURL(url), 2000);
+        }
+      } catch (err) {
+        // Fallback: data-URL (universell, aber evtl. langsamer)
+        const dataUrl = "data:text/calendar;charset=utf8," + encodeURIComponent(ics);
+        // iOS Safari öffnet data-URLs zuverlässig in vielen Fällen
+        window.location.href = dataUrl;
+      }
     });
 
 
