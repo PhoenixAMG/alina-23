@@ -1,0 +1,747 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alina’s 23. Geburtstag – Einladung</title>
+  <meta name="description" content="Digitale Einladung zu Alinas 23. Geburtstag" />
+
+  <style>
+    :root{
+      --bg1:#070312;
+      --bg2:#12031a;
+
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --line: rgba(255,255,255,.10);
+
+      --pink:#ff2ec4;
+      --fuchsia:#d946ef;
+      --orange:#ff7a18;
+
+      --card: rgba(255,255,255,.06);
+      --shadow: 0 22px 70px rgba(0,0,0,.55);
+      --radius: 22px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+      color: var(--text);
+      background:
+        radial-gradient(800px 420px at 10% 15%, rgba(255,46,196,.18), transparent 60%),
+        radial-gradient(900px 520px at 92% 18%, rgba(255,122,24,.12), transparent 60%),
+        radial-gradient(900px 520px at 55% 92%, rgba(217,70,239,.14), transparent 60%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      overflow-x:hidden;
+    }
+
+    /* Leopard accent overlay (subtle) */
+    body:before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      opacity:.14;
+      mix-blend-mode: screen;
+      background:
+        radial-gradient(22px 18px at 18% 25%, rgba(255,122,24,.55) 0 35%, transparent 36%),
+        radial-gradient(22px 18px at 24% 33%, rgba(255,46,196,.60) 0 35%, transparent 36%),
+        radial-gradient(22px 18px at 30% 22%, rgba(255,122,24,.55) 0 35%, transparent 36%),
+        radial-gradient(22px 18px at 40% 30%, rgba(255,46,196,.55) 0 35%, transparent 36%),
+        radial-gradient(22px 18px at 52% 20%, rgba(255,122,24,.55) 0 35%, transparent 36%),
+        radial-gradient(22px 18px at 64% 28%, rgba(255,46,196,.55) 0 35%, transparent 36%),
+        radial-gradient(22px 18px at 74% 18%, rgba(255,122,24,.55) 0 35%, transparent 36%),
+        radial-gradient(22px 18px at 82% 30%, rgba(255,46,196,.55) 0 35%, transparent 36%);
+      background-size: 240px 240px;
+      filter: blur(.2px);
+      z-index:0;
+    }
+    
+    /* Hero Layout: Bild – Text – Bild */
+    .heroLayout{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 18px;
+    }
+
+    .heroSide{
+      flex: 0 0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .heroImage{
+      width: 170px;
+      height: auto;
+      max-height: 200px;
+      object-fit: contain;
+      display:block;
+
+      /* keine Umrahmung/Box */
+      border: 0;
+      padding: 0;
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+
+      /* Optional: minimaler Glow nur wenn du willst – sonst löschen */
+      filter: drop-shadow(0 18px 45px rgba(0,0,0,.40));
+    }
+
+    @media (max-width: 820px){
+      .heroLayout{
+        flex-direction: column;
+        text-align:center;
+        gap: 12px;
+      }
+      .heroImage{
+        width: 140px;
+        max-height: 160px;
+      }
+    }
+  
+
+
+    /* Optional: kleiner „Tape“-Look oben links am Sticker */
+    .sticker:after{
+      content:"";
+      position:absolute;
+      top:-10px;
+      left: 18px;
+      width: 52px;
+      height: 22px;
+      transform: rotate(-8deg);
+      background: rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 10px;
+      backdrop-filter: blur(6px);
+    }
+    @media (max-width: 520px){
+      .sticker{ width: 76px; height: 76px; top: 12px; right: 12px; }
+    }
+ 
+
+    /* Hearts overlay (very subtle) */
+    body:after{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      opacity:.10;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cg fill='none'%3E%3Cpath d='M33 44c0-8 6-14 14-14 5 0 9 2 11 6 2-4 6-6 11-6 8 0 14 6 14 14 0 15-25 28-25 28S33 59 33 44Z' fill='%23ff2ec4' fill-opacity='0.40'/%3E%3Cpath d='M88 92c0-6 5-11 11-11 4 0 7 2 8 5 2-3 5-5 8-5 6 0 11 5 11 11 0 12-19 21-19 21S88 104 88 92Z' fill='%23ff7a18' fill-opacity='0.35'/%3E%3C/g%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 160px 160px;
+      mix-blend-mode: screen;
+      filter: blur(.2px);
+      z-index:0;
+    }
+
+    .wrap{ max-width: 1040px; margin: 0 auto; padding: 26px 16px 70px; position:relative; z-index:1; }
+
+    .glass{
+      background: linear-gradient(180deg, var(--card), rgba(255,255,255,.03));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    /* --- Envelope Stage --- */
+    .stage{
+      min-height: calc(100vh - 96px);
+      display:grid;
+      place-items:center;
+      position:relative;
+    }
+
+    /* Nach dem Öffnen: Briefbereich komplett ausblenden */
+    .hideStage .stage{ display:none; }
+
+    /* Optional: Page bekommt dann direkt Luft nach oben */
+    .hideStage .page{ margin-top: 0; }
+
+
+    .envelopeWrap{
+      width: min(560px, 94vw);
+      perspective: 1200px;
+      user-select:none;
+    }
+
+    .topHeader{
+      text-align:center;
+      margin-bottom: 16px;
+    }
+    .topHeader .badge{
+      display:inline-flex; align-items:center; gap:10px;
+      padding: 8px 12px;
+      border:1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(0,0,0,.16);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .topHeader h1{
+      margin: 10px 0 0;
+      font-size: clamp(34px, 6.2vw, 62px);
+      line-height: 1.03;
+      letter-spacing: -0.03em;
+      font-weight: 900;
+      text-shadow: 0 12px 40px rgba(0,0,0,.5);
+    }
+    .topHeader p{
+      margin: 10px auto 0;
+      max-width: 72ch;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.4;
+    }
+
+    .hint{
+      text-align:center;
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .envelope{
+      position:relative;
+      width: 100%;
+      aspect-ratio: 16/10;
+      transform-style: preserve-3d;
+      cursor:pointer;
+      border-radius: 20px;
+      box-shadow: 0 30px 90px rgba(0,0,0,.6);
+      outline: none;
+    }
+    .envelope:focus-visible{
+      box-shadow: 0 0 0 3px rgba(255,46,196,.35), 0 30px 90px rgba(0,0,0,.6);
+    }
+
+    .envelope .back{
+      position:absolute; inset:0;
+      border-radius: 20px;
+      background:
+        linear-gradient(135deg, rgba(255,46,196,.22), rgba(255,122,24,.16)),
+        rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.14);
+      overflow:hidden;
+    }
+
+    /* leopard-ish pattern on the envelope */
+    .envelope .back:before{
+      content:"";
+      position:absolute; inset:-40px;
+      opacity:.30;
+      background:
+        radial-gradient(18px 14px at 20% 30%, rgba(255,122,24,.9) 0 40%, transparent 41%),
+        radial-gradient(18px 14px at 27% 38%, rgba(255,46,196,.9) 0 40%, transparent 41%),
+        radial-gradient(18px 14px at 37% 28%, rgba(255,122,24,.9) 0 40%, transparent 41%),
+        radial-gradient(18px 14px at 48% 36%, rgba(255,46,196,.85) 0 40%, transparent 41%),
+        radial-gradient(18px 14px at 60% 26%, rgba(255,122,24,.85) 0 40%, transparent 41%),
+        radial-gradient(18px 14px at 70% 36%, rgba(255,46,196,.85) 0 40%, transparent 41%),
+        radial-gradient(18px 14px at 80% 26%, rgba(255,122,24,.85) 0 40%, transparent 41%);
+      background-size: 220px 180px;
+      filter: blur(.2px);
+      mix-blend-mode: screen;
+    }
+
+    .label{
+      position:absolute;
+      left: 18px; right: 18px;
+      bottom: 18px;
+      padding: 14px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+      backdrop-filter: blur(8px);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+    }
+    .label .t1{ font-weight: 900; letter-spacing:-0.01em; }
+    .label .t2{ color: var(--muted); font-size: 13px; margin-top: 2px; }
+    .spark{
+      width: 44px; height: 44px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(255,46,196,.55), rgba(255,122,24,.45));
+      border: 1px solid rgba(255,255,255,.16);
+      box-shadow: 0 0 0 6px rgba(255,46,196,.10);
+      display:grid; place-items:center;
+      font-size: 18px;
+    }
+
+    /* Flap */
+    .flap{
+      position:absolute; inset:0;
+      transform-origin: top center;
+      transform: rotateX(0deg);
+      transition: transform 900ms cubic-bezier(.2,.9,.2,1);
+      z-index: 4;
+    }
+    .flap:before{
+      content:"";
+      position:absolute; inset:0;
+      border-radius: 20px;
+      clip-path: polygon(0 0, 100% 0, 50% 58%);
+      background:
+        linear-gradient(135deg, rgba(255,46,196,.32), rgba(255,122,24,.22)),
+        rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.12);
+    }
+
+    /* Pocket */
+    .pocket{
+      position:absolute; inset:0;
+      border-radius: 20px;
+      z-index: 3;
+    }
+    .pocket:before{
+      content:"";
+      position:absolute; inset:0;
+      border-radius: 20px;
+      clip-path: polygon(0 35%, 50% 70%, 100% 35%, 100% 100%, 0 100%);
+      background: rgba(0,0,0,.16);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+
+    /* Letter (preview) */
+    .letter{
+      position:absolute;
+      left: 6%;
+      right: 6%;
+      bottom: 8%;
+      height: 76%;
+      border-radius: 18px;
+      transform: translateY(22%) rotateZ(-0.6deg);
+      transition: transform 1000ms cubic-bezier(.2,.9,.2,1), opacity 700ms ease;
+      opacity: 0;
+      z-index: 2;
+      overflow:hidden;
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+      border: 1px solid rgba(255,255,255,.16);
+      box-shadow: 0 14px 40px rgba(0,0,0,.4);
+    }
+
+    .open .flap{ transform: rotateX(165deg); }
+    .open .letter{
+      transform: translateY(-22%) rotateZ(0deg);
+      opacity: 1;
+    }
+
+    /* After open: show full page content */
+    .page{ display:none; margin-top: 18px; }
+    .showPage .page{ display:block; }
+    .showPage .stage{ min-height: unset; margin-top: 10px; }
+
+    /* --- Actual invitation page UI --- */
+    header.inv{
+      padding: 24px 22px;
+      overflow:hidden;
+      position:relative;
+    }
+    header.inv:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(700px 240px at 14% 25%, rgba(255,46,196,.30), transparent 60%),
+        radial-gradient(650px 240px at 90% 18%, rgba(255,122,24,.20), transparent 60%);
+      pointer-events:none;
+    }
+    header.inv > *{ position:relative; z-index:1; }
+
+    .heroBadge{
+      display:inline-flex; align-items:center; gap:10px;
+      padding: 8px 12px;
+      border:1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(0,0,0,.16);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .heroTitle{
+      margin: 10px 0 8px;
+      font-size: clamp(34px, 6.2vw, 60px);
+      line-height: 1.03;
+      letter-spacing: -0.03em;
+      font-weight: 900;
+    }
+    .heroSub{
+      margin:0;
+      color: var(--muted);
+      max-width: 80ch;
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    main{ margin-top: 14px; display:grid; gap: 14px; }
+    .grid{ display:grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .col-7{ grid-column: span 7; }
+    .col-5{ grid-column: span 5; }
+    .col-12{ grid-column: span 12; }
+    @media (max-width: 900px){
+      .col-7,.col-5{ grid-column: span 12; }
+    }
+
+    .card{ padding: 18px; position:relative; overflow:hidden; }
+    .card h2{ margin:0 0 10px; font-size: 18px; letter-spacing:-0.01em; }
+    .small{ font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* Left: Invitation text */
+    .inviteText{
+      font-size: 15px;
+      line-height: 1.7;
+      color: rgba(255,255,255,.86);
+    }
+    .inviteText p{ margin: 0 0 12px; }
+    .divider{
+      height:1px;
+      background: rgba(255,255,255,.10);
+      margin: 14px 0;
+    }
+
+    /* Right: Info list (UX friendly) */
+    .infoList{ display:grid; gap: 10px; margin-top: 6px; }
+
+    .infoRow{
+      display:flex;
+      gap: 12px;
+      align-items:flex-start;
+      padding: 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 16px;
+      background: rgba(0,0,0,.14);
+    }
+    .ico{
+      width: 36px; height: 36px;
+      border-radius: 12px;
+      display:grid; place-items:center;
+      flex: 0 0 auto;
+      border: 1px solid rgba(255,255,255,.14);
+      background: linear-gradient(135deg, rgba(255,46,196,.22), rgba(255,122,24,.12));
+      box-shadow: 0 0 0 5px rgba(255,46,196,.08);
+      font-size: 16px;
+    }
+    .infoMain{ flex: 1; min-width: 0; }
+    .label2{ font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+    .value2{ font-weight: 900; letter-spacing:-0.01em; line-height: 1.2; }
+    .value2 .subline{ display:block; margin-top: 6px; font-weight: 600; color: rgba(255,255,255,.78); }
+
+    .inlineActions{
+      margin-top: 8px;
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+    }
+
+    .btnSmall{
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 14px;
+      text-decoration:none;
+      display:inline-flex; align-items:center; gap:8px;
+      font-weight: 800;
+      font-size: 13px;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      cursor:pointer;
+    }
+    .btnSmall:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.10);
+      border-color: rgba(255,255,255,.20);
+    }
+    .btnSmall.primary{
+      background: linear-gradient(90deg, rgba(255,46,196,.30), rgba(255,122,24,.18));
+      border-color: rgba(255,46,196,.40);
+    }
+
+    /* Map */
+    .mapWrap{
+      margin-top: 10px;
+      border-radius: 16px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.14);
+    }
+    .mapWrap iframe{
+      width: 100%;
+      height: 220px;
+      border: 0;
+      display:block;
+    }
+
+    .topRightActions{
+      margin-top: 14px;
+      display:flex;
+      justify-content:flex-end;
+    }
+
+    footer{
+      margin-top: 14px;
+      text-align:center;
+      color: rgba(255,255,255,.55);
+      font-size: 12px;
+      padding-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap" id="root">
+
+    <!-- Envelope / Opening animation -->
+    <section class="stage" aria-label="Brief öffnen">
+      <div class="envelopeWrap">
+
+        <div class="topHeader">
+          <h1>Alina’s 23. Geburtstag</h1>
+          <p>Tippe auf den Brief, um die Einladung zu öffnen. Danach hast du alle Infos übersichtlich an einem Ort.</p>
+        </div>
+
+        <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Brief öffnen">
+          <div class="back"></div>
+          <div class="flap"></div>
+          <div class="pocket"></div>
+
+          <!-- Mini-preview inside -->
+          <div class="letter" aria-hidden="true">
+            <div style="padding:16px;">
+              <div class="heroBadge">💌 Einladung</div>
+              <div style="font-size:22px; font-weight:900; margin-top:10px; letter-spacing:-.02em;">
+                Reinfeiern ✨
+              </div>
+              <div style="margin-top:8px; color: rgba(255,255,255,.72); font-size:13px;">
+                11.04 ab 18:00 · bis nach Mitternacht
+              </div>
+            </div>
+            <div style="height:1px; background: rgba(255,255,255,.12);"></div>
+            <div style="padding:16px; font-size:13px; color: rgba(255,255,255,.75); line-height:1.4;">
+              <b>Ort:</b> Auf der Nutzung 2<br>
+              <b>PLZ/Ort:</b> 91074 Herzogenaurach
+            </div>
+          </div>
+
+          <div class="label">
+            <div>
+              <div class="t1">💌 Einladung öffnen</div>
+            </div>
+            <div class="spark">✨</div>
+          </div>
+        </div>
+
+        <div class="hint">Mobile friendly · GitHub Pages kompatibel</div>
+      </div>
+    </section>
+
+    <!-- The actual page content -->
+    <div class="page" id="page">
+      <header class="glass inv">
+        <div class="heroLayout">
+
+          <!-- Left image -->
+          <div class="heroSide">
+            <img src="alina_left.png" alt="Alina" class="heroImage">
+          </div>
+
+          <!-- Text -->
+          <div class="heroText">
+            <div class="heroBadge">🎉 11.04 → 12.04.2026 </div>
+            <div class="heroTitle">Alina’s 23. Geburtstag</div>
+            <!--<p class="heroSub">
+              Wir starten am <b>11.04 ab 18:00</b> und feiern rein in den <b>12.04</b>.
+              Alles Wichtige findest du unten – übersichtlich & schnell erfassbar.
+            </p> -->
+          </div>
+          
+        </div>
+      </header>
+
+      <main class="grid">
+        <!-- Left column: Invitation text -->
+        <section class="glass card col-7">
+          <h2>✨ Einladung</h2>
+          <div class="inviteText">
+            <p>
+              Hello,
+              <br>
+              ich würde gerne mit Dir in meinen 23. Geburtstag reinfeiern 🥳
+              Dafür habe ich in Herzogenaurach eine Location gemietet und freue mich sehr, wenn Du dabei bist ❣️
+            </p>
+            <p>
+              Für meine Planung wäre es super, wenn Du kurz im Chat abstimmst, ob Du kommst oder nicht.
+            </p>
+            <p>Ich freue mich auf Dich!</p>
+            <div class="divider"></div>
+            <p class="small">
+              Wenn Du eine +1 mitbringen möchtest, gib mir gerne kurz Bescheid 😊
+            </p>
+          </div>
+        </section>
+
+        <!-- Right column: Key info -->
+        <section class="glass card col-5">
+          <h2>📌 Die wichtigsten Infos</h2>
+
+          <div class="infoList">
+            <!-- Date/Time + Add to calendar -->
+            <div class="infoRow">
+              <div class="ico">🗓️</div>
+              <div class="infoMain">
+                <div class="label2">Datum & Uhrzeit</div>
+                <div class="value2">
+                  11. April · ab 18:00
+                  <span class="subline">Reinfeiern in den 12. April</span>
+                </div>
+                <div class="inlineActions">
+                  <button class="btnSmall primary" id="icsBtn" type="button">➕ In Kalender</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Start -->
+            <div class="infoRow">
+              <div class="ico">⏱️</div>
+              <div class="infoMain">
+                <div class="label2">Start</div>
+                <div class="value2">18:00 Uhr</div>
+              </div>
+            </div>
+
+            <!-- Location + Map -->
+            <div class="infoRow">
+              <div class="ico">📍</div>
+              <div class="infoMain">
+                <div class="label2">Ort</div>
+                <div class="value2">
+                  Auf der Nutzung 2
+                  <span class="subline">91074 Herzogenaurach</span>
+                </div>
+
+                <div class="mapWrap" aria-label="Kartenausschnitt">
+                  <!-- Map embed: works on GitHub Pages; requires user internet connection -->
+                  <iframe
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    src="https://www.google.com/maps?q=Auf%20der%20Nutzung%202%2C%2091074%20Herzogenaurach&output=embed">
+                  </iframe>
+                </div>
+              </div>
+            </div>
+
+            <!-- Parking -->
+            <div class="infoRow">
+              <div class="ico">🚗</div>
+              <div class="infoMain">
+                <div class="label2">Parkplätze</div>
+                <div class="value2">mehr als genug</div>
+              </div>
+            </div>
+
+            <!-- Food/Drinks -->
+            <div class="infoRow">
+              <div class="ico">🍕</div>
+              <div class="infoMain">
+                <div class="label2">Verpflegung</div>
+                <div class="value2">Abendessen, Snacks & Drinks</div>
+              </div>
+            </div>
+          </div>
+           <!-- Right image -->
+              <div class="heroSide">
+                <img src="alina_right.png" alt="Alina" class="heroImage">
+              </div>
+        </section>
+      </main>
+
+      <!--<footer>🐆💕 Modern UI · Dezent Hearts · Best UX</footer> -->
+    </div>
+  </div>
+
+  <script>
+    // Envelope open logic
+    const root = document.getElementById("root");
+    const envelope = document.getElementById("envelope");
+    const page = document.getElementById("page");
+    const reopenBtn = document.getElementById("reopenBtn");
+
+    function openEnvelope(){
+      envelope.classList.add("open");
+      setTimeout(() => {
+        root.classList.add("showPage");
+        root.classList.add("hideStage"); // <- Brief weg
+        page.scrollIntoView({behavior:"smooth", block:"start"});
+      }, 650);
+    }
+
+    function resetEnvelope(){
+      root.classList.remove("showPage");
+      envelope.classList.remove("open");
+      window.scrollTo({top:0, behavior:"smooth"});
+    }
+
+    envelope.addEventListener("click", openEnvelope);
+    envelope.addEventListener("keydown", (e) => {
+      if(e.key === "Enter" || e.key === " ") openEnvelope();
+    });
+    reopenBtn?.addEventListener("click", (e) => { e.preventDefault(); resetEnvelope(); });
+
+    // ICS download (calendar)
+    // Event: 11.04 18:00 -> 12.04 02:00 (anpassen falls nötig)
+    const event = {
+      title: "Alina’s 23. Geburtstag – Reinfeiern",
+      location: "Auf der Nutzung 2, 91074 Herzogenaurach",
+      description: "Alina’s 23. Geburtstag. Start: 11.04 ab 18:00, reinfeiern in den 12.04.",
+      startLocal: "2026-04-11T18:00",
+      endLocal:   "2026-04-12T02:00"
+    };
+
+    function toICSDate(localDateTime){
+      return localDateTime.replace(/[-:]/g, "").replace("T","T") + "00";
+    }
+
+    document.getElementById("icsBtn").addEventListener("click", (e) => {
+      e.preventDefault();
+      const dtStart = toICSDate(event.startLocal);
+      const dtEnd   = toICSDate(event.endLocal);
+      const uid = "alina-invite-" + Math.random().toString(16).slice(2) + "@invite";
+      const dtstamp = toICSDate(new Date().toISOString().slice(0,16));
+      const ics =
+      `BEGIN:VCALENDAR
+      VERSION:2.0
+      PRODID:-//Invite//DE
+      CALSCALE:GREGORIAN
+      METHOD:PUBLISH
+      BEGIN:VEVENT
+      UID:${uid}
+      DTSTAMP:${dtstamp}
+      DTSTART:${dtStart}
+      DTEND:${dtEnd}
+      SUMMARY:${event.title}
+      LOCATION:${event.location}
+      DESCRIPTION:${event.description}
+      END:VEVENT
+      END:VEVENT
+      END:VCALENDAR`;
+
+      // Fix: remove accidental duplicate END:VEVENT if any
+      const cleaned = ics.replace("END:VEVENT\nEND:VEVENT", "END:VEVENT");
+
+      const blob = new Blob([cleaned], { type: "text/calendar;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "Alina-23-Einladung.ics";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    });
+  </script>
+</body>
+</html>
